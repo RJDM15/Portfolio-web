@@ -1,4 +1,5 @@
 import { HomeData } from "../../Data/Home/home"
+import { Topbar } from "./Topbar"
 
 export const Home = ({ language }) => {
 
@@ -6,7 +7,7 @@ export const Home = ({ language }) => {
 
     return (
         <div className="bg-tertiary min-h-screen">
-            <h1 className="text-neutral-light font-bold">{data.title}</h1>
+            <Topbar language={language} />
         </div>
     )
 }

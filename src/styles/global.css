@@ -1,10 +1,49 @@
 @import "tailwindcss";
 
+:root {
+    --color-primary-val: #A2CC00;
+    --color-secondary-val: #FFFFFF;
+    --color-tertiary-val: #F4F4F6;
+    --color-tertiary-light-val: #D8F2FF;
+    --color-neutral-val: #666666;
+    --color-neutral-light-val: #0A0A0A;
+}
+
+html.dark {
+    --color-primary-val: #D2FF00;
+    --color-secondary-val: #1A1A1A;
+    --color-tertiary-val: #0A0A0A;
+    --color-tertiary-light-val: #D8F2FF;
+    --color-neutral-val: #808080;
+    --color-neutral-light-val: #FAFAFA;
+}
+
 @theme {
-    --color-primary: #D2FF00;
-    --color-secondary: #1A1A1A;
-    --color-tertiary: #0A0A0A;
-    --color-tertiary-light: #D8F2FF;
-    --color-neutral: #808080;
-    --color-neutral-light: #FAFAFA;
+    --color-primary: var(--color-primary-val);
+    --color-secondary: var(--color-secondary-val);
+    --color-tertiary: var(--color-tertiary-val);
+    --color-tertiary-light: var(--color-tertiary-light-val);
+    --color-neutral: var(--color-neutral-val);
+    --color-neutral-light: var(--color-neutral-light-val);
+
+    --text-title: clamp(2rem, 3vw, 3rem);
+
+    --spacing-header: clamp(5rem, 5vw, 10rem);
+    --spacing-section: clamp(0.5rem, 5vw, 15rem);
+}
+
+body,
+label {
+    font-family: "Montserrat", sans-serif;
+    background-color: var(--color-tertiary-val);
+    color: var(--color-neutral-light-val);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+    font-family: "Inter", sans-serif;
 }
