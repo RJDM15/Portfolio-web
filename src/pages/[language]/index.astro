@@ -1,0 +1,14 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { Home } from "../../components/Home/Home.jsx";
+
+export const getStaticPaths = () => {
+    return [{ params: { language: "es" } }, { params: { language: "en" } }];
+};
+
+const language = Astro.params.language;
+---
+
+<Layout>
+    <Home language={language} client:load />
+</Layout>

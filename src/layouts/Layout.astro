@@ -1,3 +1,11 @@
+---
+import { data } from "../Data/data";
+import '../styles/global.css';
+
+const language = Astro.params.language;
+const title = data.translations[language].title;
+---
+
 <!doctype html>
 <html lang="en">
 	<head>
@@ -6,7 +14,7 @@
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<link rel="icon" href="/favicon.ico" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
+		<title>{title}</title>
 	</head>
 	<body>
 		<slot />
