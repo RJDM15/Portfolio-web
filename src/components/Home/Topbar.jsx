@@ -15,17 +15,21 @@ export const Topbar = ({ language }) => {
         { label: data.thirdElement, key: "third" },
     ];
 
+    const handleReload = () => {
+        window.location.reload();
+    };
+
     return (
         <>
-            <motion.nav initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, ease: "easeOut" }} className="bg-secondary/50 backdrop-blur-md rounded-b-2xl w-full px-5 md:pr-10 py-5 md:py-2 h-header flex flex-row justify-center border-b border-primary/30 relative z-30">
-                <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.5, delay: 0.1 }} className="flex-2 md:flex-1">
-                    <h1 className="text-neutral-light text-title font-extrabold">{data.title}</h1>
-                </motion.div>
+            <nav className="bg-secondary/50 backdrop-blur-md rounded-b-2xl w-full px-5 md:pr-10 py-5 md:py-2 h-header flex flex-row justify-center border-b border-primary/30 relative z-30">
+                <div className="flex-2 md:flex-1">
+                    <h2 onClick={handleReload} className="text-neutral-light text-title font-extrabold cursor-pointer inline-block">{data.title}</h2>
+                </div>
 
                 <div className="flex-1 md:flex-1 flex flex-row justify-end items-center gap-6">
-                    <button onClick={() => setIsMobileMenuOpen(true)} className="md:hidden text-neutral-light mt-1.5 focus:outline-none cursor-pointer">
+                    <motion.button initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.4, delay: 0.2 }} onClick={() => setIsMobileMenuOpen(true)} className="md:hidden text-neutral-light mt-1.5 focus:outline-none cursor-pointer">
                         <Logs size={32} />
-                    </button>
+                    </motion.button>
 
                     {navItems.map((item, index) => {
                         const isActive = activeTab === item.key;
@@ -39,7 +43,7 @@ export const Topbar = ({ language }) => {
                         );
                     })}
 
-                    <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.4, delay: 0.45 }} className="hidden md:flex items-center gap-3">
+                    <div className="hidden md:flex items-center gap-3">
                         <ThemeToggle />
 
                         <div className="border border-neutral/40 rounded-2xl p-1 flex flex-row items-center text-neutral-light text-sm font-semibold">
@@ -57,15 +61,15 @@ export const Topbar = ({ language }) => {
                                 US
                             </a>
                         </div>
-                    </motion.div>
+                    </div>
                 </div>
-            </motion.nav>
+            </nav>
 
             <AnimatePresence>
                 {isMobileMenuOpen && (
                     <motion.div initial={{ x: "100%" }} animate={{ x: 0 }} exit={{ x: "100%" }} transition={{ type: "spring", damping: 28, stiffness: 220 }} className="fixed inset-0 z-50 bg-tertiary/95 backdrop-blur-2xl flex flex-col justify-between p-8 md:hidden text-neutral-light">
                         <div className="flex flex-row justify-between items-center w-full border-b border-primary/20 pb-4">
-                            <h2 className="text-xl font-extrabold">{data.title}</h2>
+                            <h2 onClick={handleReload} className="text-xl font-extrabold cursor-pointer">{data.title}</h2>
                             <button onClick={() => setIsMobileMenuOpen(false)} className="text-neutral-light hover:text-primary transition-colors cursor-pointer p-1">
                                 <X size={32} />
                             </button>

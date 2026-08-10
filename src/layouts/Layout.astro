@@ -1,6 +1,7 @@
 ---
 import { data } from "../Data/data";
-import '../styles/global.css';
+import "../styles/global.css";
+import { Footer } from "../components/Footer/Footer";
 
 const language = Astro.params.language;
 const title = data.translations[language].title;
@@ -26,6 +27,7 @@ const title = data.translations[language].title;
 	</head>
 	<body>
 		<slot />
+		<Footer />
 	</body>
 </html>
 
