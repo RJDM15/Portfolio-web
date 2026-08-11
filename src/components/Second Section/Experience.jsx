@@ -12,11 +12,11 @@ export const Experience = ({ language }) => {
                 <p className="font-light flex items-end pr-2">2024-2026</p>
             </div>
             <div className="border-b border-neutral w-full" />
-            <div className="flex flex-wrap gap-10 px-2 mt-10">
+            <div className="grid grid-cols-1 md:grid-cols-3 2xl:grid-cols-4 gap-6 md:gap-8 mt-10">
                 {
                     projects.map((project, index) => {
                         return (
-                            <motion.a href={project.url || "#"} key={project.id ?? project.projectName} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: index * 0.15 }} whileHover={{ y: -8, scale: 1.015 }} className="bg-secondary rounded-2xl md:min-w-96 md:max-w-96 md:min-h-110 p-5 flex flex-col gap-y-4 border border-neutral/20 hover:border-primary/40 transition-colors duration-300 cursor-pointer shadow-lg hover:shadow-2xl group">
+                            <motion.a href={project.url || "#"} key={project.id ?? project.projectName} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: index * 0.15 }} whileHover={{ y: -8, scale: 1.015 }} className="bg-secondary rounded-2xl p-5 flex flex-col gap-y-4 border border-neutral/20 hover:border-primary/40 transition-colors duration-300 cursor-pointer shadow-lg hover:shadow-2xl group w-full">
                                 <div className="relative w-full min-h-48 max-h-48 rounded-2xl bg-neutral/50 overflow-hidden">
                                     {project.image ? (
                                         <img src={project.image} alt={project.projectName} className="w-full h-full object-cover rounded-2xl transition-transform duration-500 group-hover:scale-105" />

@@ -15,13 +15,27 @@ export const Topbar = ({ language }) => {
         { label: data.thirdElement, key: "third" },
     ];
 
+    const sectionMap = {
+        first: "experience",
+        second: "tools",
+        third: "contact"
+    };
+
+    const handleNavClick = (key) => {
+        setActiveTab(key);
+        const targetId = sectionMap[key];
+        if (targetId) {
+            document.getElementById(targetId)?.scrollIntoView({ behavior: "smooth" });
+        }
+    };
+
     const handleReload = () => {
         window.location.reload();
     };
 
     return (
         <>
-            <nav className="bg-secondary/50 backdrop-blur-md rounded-b-2xl w-full px-5 md:pr-10 py-5 md:py-2 h-header flex flex-row justify-center border-b border-primary/30 relative z-30">
+            <nav className="sticky top-0 z-40 bg-secondary/80 backdrop-blur-md rounded-b-2xl w-full px-5 md:pr-10 py-5 md:py-2 h-header flex flex-row justify-center border-b border-primary/30">
                 <div className="flex-2 md:flex-1">
                     <h2 onClick={handleReload} className="text-neutral-light text-title font-extrabold cursor-pointer inline-block">{data.title}</h2>
                 </div>
@@ -34,7 +48,7 @@ export const Topbar = ({ language }) => {
                     {navItems.map((item, index) => {
                         const isActive = activeTab === item.key;
                         return (
-                            <motion.button key={item.key} onClick={() => setActiveTab(item.key)} initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4, delay: 0.15 + index * 0.1 }} className={`relative hidden md:flex items-center pb-1 font-semibold transition-colors cursor-pointer ${isActive ? "text-neutral-light font-bold" : "text-neutral-light/70 hover:text-primary"}`} >
+                            <motion.button key={item.key} onClick={() => handleNavClick(item.key)} initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4, delay: 0.15 + index * 0.1 }} className={`relative hidden md:flex items-center pb-1 font-semibold transition-colors cursor-pointer ${isActive ? "text-neutral-light font-bold" : "text-neutral-light/70 hover:text-primary"}`} >
                                 <span>{item.label}</span>
                                 {isActive && (
                                     <motion.div layoutId="activeUnderline" className="absolute bottom-0 left-0 right-0 h-0.75 bg-primary rounded-full shadow-[0_0_8px_var(--color-primary)]" transition={{ type: "spring", stiffness: 400, damping: 30 }} />
@@ -80,7 +94,7 @@ export const Topbar = ({ language }) => {
                                 const isActive = activeTab === item.key;
                                 return (
                                     <motion.button key={item.key} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 + index * 0.1 }} onClick={() => {
-                                        setActiveTab(item.key);
+                                        handleNavClick(item.key);
                                         setIsMobileMenuOpen(false);
                                     }}
                                         className={`text-2xl font-bold transition-colors relative pb-2 ${isActive ? "text-primary font-extrabold" : "text-neutral-light hover:text-primary"}`}>
