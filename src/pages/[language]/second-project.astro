@@ -1,0 +1,14 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { SecondProject } from "../../components/Projects/SecondProject";
+
+export const getStaticPaths = () => {
+    return [{ params: { language: "es" } }, { params: { language: "en" } }];
+};
+
+const language = Astro.params.language;
+---
+
+<Layout>
+    <SecondProject language={language} client:load />
+</Layout>
