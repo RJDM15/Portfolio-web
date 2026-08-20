@@ -5,6 +5,7 @@ import { Topbar } from "../components/Home/Topbar";
 import { Footer } from "../components/Footer/Footer";
 
 const language = Astro.params.language || "es";
+const pathname = Astro.url.pathname;
 const title = data.translations[language] ? data.translations[language].title : data.translations.es.title;
 ---
 
@@ -27,7 +28,7 @@ const title = data.translations[language] ? data.translations[language].title : 
 		</script>
 	</head>
 	<body>
-		<Topbar language={language} client:load />
+		<Topbar language={language} pathname={pathname} client:load />
 		<slot />
 		<Footer language={language} client:load />
 	</body>

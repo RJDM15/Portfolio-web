@@ -8,10 +8,10 @@ export const experienceData = {
                     projectName: "UTR WEBSITE",
                     description: "Modern institutional platform designed to centralize academic information and improve the digital experience for students and visitors.",
                     company: "UTR",
-                    image: "",
+                    image: "/Images/Card_UTR_Website.webp",
                     tags: ["Astro", "React", "Express", "MongoDB"],
                     role: "Full Stack Developer & Tech Team Leader",
-                    url: "#"
+                    url: "/en/first-project"
                 },
                 {
                     id: 1,
@@ -21,7 +21,7 @@ export const experienceData = {
                     image: "",
                     tags: ["React", "Express", "MongoDB"],
                     role: "Full Stack Developer",
-                    url: "#"
+                    url: "/en/second-project"
                 }
             ]
         },
@@ -36,7 +36,7 @@ export const experienceData = {
                     image: "",
                     tags: ["Astro", "React", "Express", "MongoDB"],
                     role: "Full Stack Developer & Tech Team Leader",
-                    url: "#"
+                    url: "/es/first-project"
                 },
                 {
                     id: 1,
@@ -46,7 +46,7 @@ export const experienceData = {
                     image: "",
                     tags: ["React", "Express", "MongoDB"],
                     role: "Full Stack Developer",
-                    url: "#"
+                    url: "/es/second-project"
                 }
             ]
         }

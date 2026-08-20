@@ -4,10 +4,24 @@ import { Logs, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ThemeToggle } from "./ThemeToggle";
 
-export const Topbar = ({ language }) => {
+export const Topbar = ({ language, pathname }) => {
     const data = TopbarData.translations[language];
     const [activeTab, setActiveTab] = useState("first");
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+    const getLangUrl = (targetLang) => {
+        const current = pathname || (typeof window !== "undefined" ? window.location.pathname : `/${language}`);
+        if (current.startsWith("/es")) {
+            return current.replace(/^\/es/, `/${targetLang}`);
+        }
+        if (current.startsWith("/en")) {
+            return current.replace(/^\/en/, `/${targetLang}`);
+        }
+        return `/${targetLang}`;
+    };
+
+    const esUrl = getLangUrl("es");
+    const enUrl = getLangUrl("en");
 
     const navItems = [
         { label: data.firstElement, key: "first" },
@@ -25,19 +39,24 @@ export const Topbar = ({ language }) => {
         setActiveTab(key);
         const targetId = sectionMap[key];
         if (targetId) {
-            document.getElementById(targetId)?.scrollIntoView({ behavior: "smooth" });
+            const element = document.getElementById(targetId);
+            if (element) {
+                element.scrollIntoView({ behavior: "smooth" });
+            } else {
+                window.location.href = `/${language}#${targetId}`;
+            }
         }
     };
 
-    const handleReload = () => {
-        window.location.reload();
+    const handleHomeClick = () => {
+        window.location.href = `/${language}`;
     };
 
     return (
         <>
             <nav className="sticky top-0 z-40 bg-secondary/80 backdrop-blur-md rounded-b-2xl w-full px-5 md:pr-10 py-5 md:py-2 h-header flex flex-row justify-center border-b border-primary/30">
                 <div className="flex-2 md:flex-1">
-                    <h2 onClick={handleReload} className="text-neutral-light text-title font-extrabold cursor-pointer inline-block">{data.title}</h2>
+                    <h2 onClick={handleHomeClick} className="text-neutral-light text-title font-extrabold cursor-pointer inline-block">{data.title}</h2>
                 </div>
 
                 <div className="flex-1 md:flex-1 flex flex-row justify-end items-center gap-6">
@@ -61,14 +80,14 @@ export const Topbar = ({ language }) => {
                         <ThemeToggle />
 
                         <div className="border border-neutral/40 rounded-2xl p-1 flex flex-row items-center text-neutral-light text-sm font-semibold">
-                            <a href="/es" className={`relative px-3 py-1 rounded-xl transition-colors ${language === "es" ? "text-tertiary font-bold" : "text-neutral-light hover:text-primary"}`}>
+                            <a href={esUrl} className={`relative px-3 py-1 rounded-xl transition-colors ${language === "es" ? "text-tertiary font-bold" : "text-neutral-light hover:text-primary"}`}>
                                 {language === "es" && (
                                     <motion.div layoutId="activeLang" className="absolute inset-0 bg-primary rounded-xl -z-10" transition={{ type: "spring", stiffness: 400, damping: 30 }} />
                                 )}
                                 MX
                             </a>
                             <span className="text-neutral/40 mx-0.5">|</span>
-                            <a href="/en" className={`relative px-3 py-1 rounded-xl transition-colors ${language === "en" ? "text-tertiary font-bold" : "text-neutral-light hover:text-primary"}`}>
+                            <a href={enUrl} className={`relative px-3 py-1 rounded-xl transition-colors ${language === "en" ? "text-tertiary font-bold" : "text-neutral-light hover:text-primary"}`}>
                                 {language === "en" && (
                                     <motion.div layoutId="activeLang" className="absolute inset-0 bg-primary rounded-xl -z-10" transition={{ type: "spring", stiffness: 400, damping: 30 }} />
                                 )}
@@ -83,7 +102,7 @@ export const Topbar = ({ language }) => {
                 {isMobileMenuOpen && (
                     <motion.div initial={{ x: "100%" }} animate={{ x: 0 }} exit={{ x: "100%" }} transition={{ type: "spring", damping: 28, stiffness: 220 }} className="fixed inset-0 z-50 bg-tertiary/95 backdrop-blur-2xl flex flex-col justify-between p-8 md:hidden text-neutral-light">
                         <div className="flex flex-row justify-between items-center w-full border-b border-primary/20 pb-4">
-                            <h2 onClick={handleReload} className="text-xl font-extrabold cursor-pointer">{data.title}</h2>
+                            <h2 onClick={handleHomeClick} className="text-xl font-extrabold cursor-pointer">{data.title}</h2>
                             <button onClick={() => setIsMobileMenuOpen(false)} className="text-neutral-light hover:text-primary transition-colors cursor-pointer p-1">
                                 <X size={32} />
                             </button>
@@ -116,14 +135,14 @@ export const Topbar = ({ language }) => {
                             <div className="flex items-center gap-4">
                                 <span className="text-sm font-semibold text-neutral">Idioma:</span>
                                 <div className="border border-neutral/40 rounded-2xl p-1 flex flex-row items-center text-sm font-semibold">
-                                    <a href="/es" className={`relative px-3 py-1 rounded-xl transition-colors ${language === "es" ? "text-tertiary font-bold" : "text-neutral-light hover:text-primary"}`}>
+                                    <a href={esUrl} className={`relative px-3 py-1 rounded-xl transition-colors ${language === "es" ? "text-tertiary font-bold" : "text-neutral-light hover:text-primary"}`}>
                                         {language === "es" && (
                                             <motion.div layoutId="activeLangMobile" className="absolute inset-0 bg-primary rounded-xl -z-10" />
                                         )}
                                         MX
                                     </a>
                                     <span className="text-neutral/40 mx-0.5">|</span>
-                                    <a href="/en" className={`relative px-3 py-1 rounded-xl transition-colors ${language === "en" ? "text-tertiary font-bold" : "text-neutral-light hover:text-primary"}`}>
+                                    <a href={enUrl} className={`relative px-3 py-1 rounded-xl transition-colors ${language === "en" ? "text-tertiary font-bold" : "text-neutral-light hover:text-primary"}`}>
                                         {language === "en" && (
                                             <motion.div layoutId="activeLangMobile" className="absolute inset-0 bg-primary rounded-xl -z-10" />
                                         )}
